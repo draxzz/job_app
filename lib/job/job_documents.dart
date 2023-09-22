@@ -43,7 +43,7 @@ class _JobUploadDocumentsState extends State<JobUploadDocuments> {
     return date;
   }
 
-  var attachment, input;
+  dynamic attachment, input;
 
   void _pickFile(bool isResume) async {
     attachment = await FilePicker.platform
@@ -55,6 +55,7 @@ class _JobUploadDocumentsState extends State<JobUploadDocuments> {
       var fileName = attachment.files.first.name;
 
       // Get the directory where you want to save the PDF file
+      // ignore: unused_local_variable
       final directory = await getApplicationDocumentsDirectory();
       final pdfDirectory = Directory.current;
       final documentsDirectory =

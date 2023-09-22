@@ -5,6 +5,7 @@ void main() {
   runApp(const MyApp());
 }
 
+// ignore: non_constant_identifier_names
 final SERVER_IP = _localhost();
 
 String _localhost() {

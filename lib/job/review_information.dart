@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:job/dashboard/dashboard.dart';
-import 'package:job/job/apply.dart';
+
 import 'package:job/profile/profile_list.dart';
 import 'package:job/util/global.dart';
 import 'package:job/util/loading_circle.dart';
-
-import 'job_list.dart';
 
 class ReviewInformation extends StatefulWidget {
   const ReviewInformation(

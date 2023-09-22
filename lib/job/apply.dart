@@ -18,7 +18,7 @@ class Application extends StatefulWidget {
 
 double _progress = 0;
 int currentPage = 0;
-final PageController _ProgressController = PageController(initialPage: 0);
+final PageController _progressController = PageController(initialPage: 0);
 
 String school = "";
 String study = "";
@@ -54,12 +54,12 @@ class _ApplicationState extends State<Application> {
       currentPage = currentPage + 1;
       _progress = (currentPage + 1) / 3;
     });
-    _ProgressController.nextPage(
+    _progressController.nextPage(
         duration: const Duration(milliseconds: 500), curve: Curves.ease);
   }
 
   void previousPage() {
-    _ProgressController.previousPage(
+    _progressController.previousPage(
         duration: const Duration(milliseconds: 500), curve: Curves.ease);
     setState(() {
       currentPage = currentPage - 1;
@@ -128,7 +128,7 @@ class _ApplicationState extends State<Application> {
               ),
               Expanded(
                 child: PageView(
-                  controller: _ProgressController,
+                  controller: _progressController,
                   onPageChanged: (int page) {
                     setState(() {
                       currentPage = page;

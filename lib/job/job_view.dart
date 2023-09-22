@@ -66,6 +66,7 @@ class _JobListingsState extends State<JobListings> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
