@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, unused_import
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -55,16 +57,16 @@ class _JobUploadDocumentsState extends State<JobUploadDocuments> {
       var fileName = attachment.files.first.name;
 
       // Get the directory where you want to save the PDF file
-      // ignore: unused_local_variable
-      final directory = await getApplicationDocumentsDirectory();
-      final pdfDirectory = Directory.current;
-      final documentsDirectory =
-          Directory(path.join(pdfDirectory.path, 'documents'));
 
-      // Save the PDF file to the root folder of the documents directory
-      final file = File(path.join(documentsDirectory.path, fileName));
+      // final directory = await getApplicationDocumentsDirectory();
+      // final pdfDirectory = Directory.current;
+      // final documentsDirectory =
+      //     Directory(path.join(pdfDirectory.path, 'documents'));
 
-      await file.writeAsBytes(bytes);
+      // // Save the PDF file to the root folder of the documents directory
+      // final file = File(path.join(documentsDirectory.path, fileName));
+
+      // await file.writeAsBytes(bytes);
     } else {}
   }
 

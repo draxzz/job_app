@@ -1,6 +1,10 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:job/profile/profile_list.dart';
 import 'package:job/util/hard_code_list.dart' as hcl;
+import 'package:http/http.dart' as http;
 
 import 'job_list.dart';
 
@@ -13,15 +17,50 @@ class AppliedJobs extends StatefulWidget {
 
 class _AppliedJobsState extends State<AppliedJobs> {
   List<JobList> appliedJobsList = [];
+  List<JobList> jobListings = [];
+  ProfileList? profileList;
+
+  bool _isLoadedJob = false;
+  bool _isLoadedProfile = false;
+  Future? futureJobListings;
+  Future? futureProfileListings;
   @override
   void initState() {
     super.initState();
 
-    for (final job in hcl.jobLists) {
-      if (hcl.profiles[0].appliedList.contains(job.id)) {
-        appliedJobsList.add(job);
-      }
+    futureJobListings = getJobs();
+    futureProfileListings = getProfile();
+  }
+
+  // get job listing
+  Future getJobs() async {
+    // final populatedJobs = await fetchJobList(http.Client());
+    if (!_isLoadedJob) {
+      setState(() {
+        jobListings = hcl.jobLists;
+        _isLoadedJob = true;
+      });
     }
+
+    return jobListings;
+  }
+
+  // get profile
+  Future getProfile() async {
+    // final populatedProfile = await fetchProfile(http.Client());
+    if (!_isLoadedProfile) {
+      setState(() {
+        profileList = hcl.profiles[0];
+        for (final job in jobListings) {
+          if (profileList!.appliedList.contains(job.id)) {
+            appliedJobsList.add(job);
+          }
+        }
+        _isLoadedProfile = true;
+      });
+    }
+
+    return appliedJobsList;
   }
 
   String formatDisplayDate(String date) {

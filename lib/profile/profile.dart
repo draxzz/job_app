@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:job/util/hard_code_list.dart' as hcl;
 
+import 'profile_list.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -10,6 +12,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  ProfileList? profileList;
+
+  bool _isLoadedProfile = false;
+
+  Future? futureProfileListings;
+  @override
+  void initState() {
+    super.initState();
+
+    futureProfileListings = getProfile();
+  }
+
   String formatDisplayDate(String date) {
     if (date != "") {
       date = DateFormat("dd-MM-yy").format(DateTime.parse(date)).toString();
@@ -18,6 +32,19 @@ class _ProfilePageState extends State<ProfilePage> {
       date = "";
     }
     return date;
+  }
+
+  Future getProfile() async {
+    // final populatedProfile = await fetchProfile(http.Client());
+    if (!_isLoadedProfile) {
+      setState(() {
+        profileList = hcl.profiles[0];
+
+        _isLoadedProfile = true;
+      });
+    }
+
+    return profileList;
   }
 
   @override
@@ -52,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: CircleAvatar(
                   maxRadius: 50,
                   backgroundImage: AssetImage(
-                    hcl.profiles[0].image,
+                    profileList!.image,
                   ),
                 ),
               ),
@@ -76,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 "Full Name",
                 style: TextStyle(color: Colors.grey),
               ),
-              Text("${hcl.profiles[0].firstName} ${hcl.profiles[0].lastName}"),
+              Text("${profileList!.firstName} ${profileList!.lastName}"),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
@@ -84,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 "Email",
                 style: TextStyle(color: Colors.grey),
               ),
-              Text(hcl.profiles[0].email),
+              Text(profileList!.email),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
@@ -92,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 "Mobile Number",
                 style: TextStyle(color: Colors.grey),
               ),
-              Text("${hcl.profiles[0].mobileNumber} "),
+              Text("${profileList!.mobileNumber} "),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
@@ -120,11 +147,11 @@ class _ProfilePageState extends State<ProfilePage> {
               ListTile(
                 contentPadding: const EdgeInsets.all(0),
                 title: Text(
-                  hcl.profiles[0].resumeList[0].name,
+                  profileList!.resumeList[0].name,
                 ),
                 subtitle: Text(
                   formatDisplayDate(
-                    hcl.profiles[0].resumeList[0].uploadDate,
+                    profileList!.resumeList[0].uploadDate,
                   ),
                 ),
                 leading: const SizedBox(
@@ -139,11 +166,11 @@ class _ProfilePageState extends State<ProfilePage> {
               ListTile(
                 contentPadding: const EdgeInsets.all(0),
                 title: Text(
-                  hcl.profiles[0].coverList[0].name,
+                  profileList!.coverList[0].name,
                 ),
                 subtitle: Text(
                   formatDisplayDate(
-                    hcl.profiles[0].coverList[0].uploadDate,
+                    profileList!.coverList[0].uploadDate,
                   ),
                 ),
                 leading: const SizedBox(

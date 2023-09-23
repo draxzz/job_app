@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job/profile/profile_list.dart';
 
 import 'job_documents.dart';
 import 'job_information.dart';
@@ -8,7 +9,10 @@ import 'package:job/util/hard_code_list.dart' as hcl;
 import 'review_information.dart';
 
 class Application extends StatefulWidget {
-  const Application({super.key, required this.id});
+  const Application({
+    super.key,
+    required this.id,
+  });
 
   final String id;
 
@@ -31,10 +35,17 @@ bool educationSwitch = false;
 bool experienceSwitch = false;
 
 class _ApplicationState extends State<Application> {
+  ProfileList? profileList;
+
+  bool _isLoadedProfile = false;
+
+  Future? futureProfileListings;
+
   @override
   void initState() {
     super.initState();
     _progress = 1 / 3;
+    futureProfileListings = getProfile();
   }
 
   String returnProgressTitle() {
@@ -65,6 +76,19 @@ class _ApplicationState extends State<Application> {
       currentPage = currentPage - 1;
       _progress = (currentPage - 1) / 3;
     });
+  }
+
+  Future getProfile() async {
+    // final populatedProfile = await fetchProfile(http.Client());
+    if (!_isLoadedProfile) {
+      setState(() {
+        profileList = hcl.profiles[0];
+
+        _isLoadedProfile = true;
+      });
+    }
+
+    return profileList;
   }
 
   @override
@@ -141,7 +165,7 @@ class _ApplicationState extends State<Application> {
                       height: screenHeight,
                       width: screenWidth,
                       nextPage: nextPage,
-                      profile: hcl.profiles[0],
+                      profile: profileList!,
                       selectedResume: selectedResume,
                       selectedCoverLetter: selectedCoverLetter,
                     ),
@@ -159,7 +183,7 @@ class _ApplicationState extends State<Application> {
                       height: screenHeight,
                       width: screenWidth,
                       nextPage: nextPage,
-                      profile: hcl.profiles[0],
+                      profile: profileList!,
                       selectedResume: selectedResume,
                       selectedCoverLetter: selectedCoverLetter,
                       id: widget.id,

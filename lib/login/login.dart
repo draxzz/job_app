@@ -171,7 +171,6 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: screenHeight * 0.02,
                   ),
-                  // LoadingCircle(isLoading: _isLoading),
                   const SizedBox(
                     child: Text(
                       "Password",
@@ -268,16 +267,16 @@ class _LoginPageState extends State<LoginPage> {
                             height: screenHeight * 0.08,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const JobDashboard()),
-                                );
-                                // final FormState? form = _formKey.currentState;
-                                // if (form!.validate()) {
-                                //   login(email!, password!);
-                                // } else {}
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const JobDashboard()),
+                                // );
+                                final FormState? form = _formKey.currentState;
+                                if (form!.validate()) {
+                                  login(email!, password!);
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orange,
