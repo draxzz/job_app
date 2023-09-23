@@ -1,16 +1,11 @@
 # job
 
-A new Flutter project.
+A Flutter login page with job listings and applying of jobs
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Login Details are in util folder hard_code_list.dart, change userEmail and password to your usage and test login.
 
-A few resources to get you started if this is your first Flutter project:
+email: bobtan@gmail.com
+password: 12345
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
